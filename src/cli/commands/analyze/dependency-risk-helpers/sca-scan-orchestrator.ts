@@ -28,6 +28,7 @@ import { type SonarQubeClient } from '../../../../sonarqube/client';
 import type { ScaScannerInstaller } from '../../_common/install/sca-scanner';
 import { assertScaAvailable } from '../../_common/sca-availability';
 import { parseAnalysisProperties } from './analysis-properties';
+import { collectManifestFiles, scanManifestsForSecrets } from './manifest-secrets-guard';
 import {
   type AnalyzeProjectResponse,
   type ScaScannerInvocation,
@@ -35,6 +36,7 @@ import {
 } from './sca-scanner';
 import type { ScaScannerSpawner } from './sca-scanner-spawner';
 import { buildScaUrls } from './sca-urls';
+import { ScaWatchPatternsRunner } from './sca-watch-patterns';
 
 export class ScaScanOrchestrator {
   constructor(
@@ -48,6 +50,15 @@ export class ScaScanOrchestrator {
     const settings = await this.client.getProjectSettings(projectKey);
     const properties = parseAnalysisProperties(settings);
     logger.debug(`Resolved analysis properties: ${JSON.stringify(properties)}`);
+
+    const watchPatterns = await new ScaWatchPatternsRunner(this.installer, this.spawner).run();
+    const manifestFiles = await collectManifestFiles(
+      process.cwd(),
+      watchPatterns,
+      properties.includeGitIgnoredPaths,
+    );
+    await scanManifestsForSecrets(manifestFiles, auth);
+
     const { apiBaseUrl, downloadBaseUrl } = buildScaUrls(auth);
     const invocation: ScaScannerInvocation = {
       baseDir: process.cwd(),
