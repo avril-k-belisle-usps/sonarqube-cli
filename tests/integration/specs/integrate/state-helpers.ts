@@ -29,6 +29,7 @@ export interface InstalledIntegrationFeature {
   scope: string;
   targetRoot?: string;
   dependencies?: Array<{ id: string }>;
+  resources?: Array<{ id: string; resourceType: string; path: string }>;
   attrs?: Record<string, unknown>;
 }
 

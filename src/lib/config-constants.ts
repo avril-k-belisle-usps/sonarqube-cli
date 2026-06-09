@@ -138,6 +138,16 @@ export const AGENTIC_ANALYSIS_DOCS_URL =
 export const AGENT_ACTIVITY_PATH = '/project/agent_activity';
 
 // ---------------------------------------------------------------------------
+// Cursor IDE
+// ---------------------------------------------------------------------------
+
+/** Project-level config directory for Cursor integrations. */
+export const CURSOR_CONFIG_DIR = '.cursor';
+
+/** Project-level ignore file that restricts Cursor agent file access. */
+export const CURSOR_IGNORE_FILE = '.cursorignore';
+
+// ---------------------------------------------------------------------------
 // Context Augmentation
 // ---------------------------------------------------------------------------
 
