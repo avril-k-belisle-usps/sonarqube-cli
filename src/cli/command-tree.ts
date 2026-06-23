@@ -37,7 +37,6 @@ import { CommandFailedError } from './commands/_common/error';
 import { parseInteger } from './commands/_common/parsing';
 import { SonarCommand } from './commands/_common/sonar-command.js';
 import { analyzeAll, type AnalyzeAllOptions } from './commands/analyze/analyze-all';
-import { mockupCommand } from './commands/mockup/index';
 import type { Severity } from './commands/analyze/dependency-risk-helpers/sca-scanner';
 import { SEVERITIES } from './commands/analyze/dependency-risk-helpers/view-model/build/severity';
 import {
@@ -91,6 +90,7 @@ import {
   VALID_STATUSES,
 } from './commands/list/issues';
 import { listProjects, type ListProjectsOptions } from './commands/list/projects';
+import { mockupCommand } from './commands/mockup/index';
 import { remediate, type RemediateOptions } from './commands/remediate';
 import { runMcp } from './commands/run/mcp.js';
 import { selfUpdate, type SelfUpdateOptions } from './commands/self-update/self-update';

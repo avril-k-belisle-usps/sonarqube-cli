@@ -25,8 +25,8 @@ import { selectPrompt } from '../../../ui/components/prompts.js';
 import { print } from '../../../ui/messages.js';
 import {
   AGENTS,
-  FEATURE_LABELS,
   type FakeInstall,
+  FEATURE_LABELS,
   type MockupOption,
   multiSelectWithInitial,
 } from './shared.js';
@@ -37,9 +37,7 @@ const ALREADY = dim(' (already integrated)');
 
 function buildScopeOptions(installs: FakeInstall[]): { value: string; label: string }[] {
   const globalInstall = installs.find((i) => i.scope === 'global');
-  const currentInstall = installs.find(
-    (i) => i.scope === 'project' && i.label === CURRENT_PROJECT,
-  );
+  const currentInstall = installs.find((i) => i.scope === 'project' && i.label === CURRENT_PROJECT);
   const otherInstalls = installs.filter(
     (i) => i.scope === 'project' && i.label !== CURRENT_PROJECT,
   );

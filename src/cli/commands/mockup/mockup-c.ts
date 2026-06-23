@@ -25,8 +25,8 @@ import { selectPrompt } from '../../../ui/components/prompts.js';
 import { print } from '../../../ui/messages.js';
 import {
   AGENTS,
-  FEATURE_LABELS,
   type FakeInstall,
+  FEATURE_LABELS,
   type MockupOption,
   multiSelectWithInitial,
 } from './shared.js';
@@ -45,9 +45,7 @@ interface PendingChange {
 
 function scopeOptionsFor(installs: FakeInstall[]): MockupOption[] {
   const globalInstall = installs.find((i) => i.scope === 'global');
-  const currentInstall = installs.find(
-    (i) => i.scope === 'project' && i.label === CURRENT_PROJECT,
-  );
+  const currentInstall = installs.find((i) => i.scope === 'project' && i.label === CURRENT_PROJECT);
   const otherInstalls = installs.filter(
     (i) => i.scope === 'project' && i.label !== CURRENT_PROJECT,
   );
@@ -104,7 +102,12 @@ async function collectNewScopeChange(
   return {
     agent: agentName,
     scope: scopeLabel,
-    install: { scope: 'project', label: scopeId, installedFeatures: [], availableFeatures: uniqueFeatures },
+    install: {
+      scope: 'project',
+      label: scopeId,
+      installedFeatures: [],
+      availableFeatures: uniqueFeatures,
+    },
     toRemove: [],
     toAdd: result,
   };
