@@ -37,6 +37,7 @@ import { CommandFailedError } from './commands/_common/error';
 import { parseInteger } from './commands/_common/parsing';
 import { SonarCommand } from './commands/_common/sonar-command.js';
 import { analyzeAll, type AnalyzeAllOptions } from './commands/analyze/analyze-all';
+import { mockupCommand } from './commands/mockup/index';
 import type { Severity } from './commands/analyze/dependency-risk-helpers/sca-scanner';
 import { SEVERITIES } from './commands/analyze/dependency-risk-helpers/view-model/build/severity';
 import {
@@ -646,6 +647,11 @@ hookCommand
 if (process.env[TELEMETRY_FLUSH_MODE_ENV]) {
   COMMAND_TREE.command('flush-telemetry', { hidden: true }).anonymousAction(flushTelemetry);
 }
+
+// Hidden UX mockup command — reconfigure flow prototypes for design review.
+COMMAND_TREE.command('mockup', { hidden: true })
+  .description('UX mockup: reconfigure flow prototypes')
+  .anonymousAction(() => mockupCommand());
 
 // Defer Sentry initialization until a command action is about to run, so that
 // non-execution paths like --help, --version, and unknown commands don't pay
