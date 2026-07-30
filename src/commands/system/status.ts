@@ -734,7 +734,7 @@ function renderNetworkSection(network: ResolvedNetworkConfig): void {
   }
   text(
     '  Note: Not all CLI features currently support proxy and certificate configuration. ' +
-      'Secrets hook, Context Augmentation and Software Composition Analysis might currently not pick up the network configuration.',
+      'Secrets hook and Context Augmentation might currently not pick up the network configuration.',
   );
   if (network.proxy) {
     renderProxySubsection(network.proxy);
