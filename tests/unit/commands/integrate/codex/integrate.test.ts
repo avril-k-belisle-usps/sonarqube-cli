@@ -76,7 +76,9 @@ describe('integrateCodex', () => {
       'hasVortexEntitlement',
     ).mockResolvedValue('not_entitled');
     checkComponentSpy = spyOn(SonarQubeClient.prototype, 'checkComponent').mockResolvedValue(true);
-    resolveVortexSetupSpy = spyOn(vortex, 'resolveVortexSetup').mockResolvedValue(null);
+    resolveVortexSetupSpy = spyOn(vortex, 'resolveVortexSetup').mockResolvedValue({
+      disposition: 'preserve',
+    });
   });
 
   afterEach(() => {
